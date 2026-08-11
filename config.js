@@ -1,92 +1,3 @@
-/* ══════════════════════════════════════════════════════════════════════════
-   DEEP FIELD — CONFIG
-   ══════════════════════════════════════════════════════════════════════════
-   This is the only file you need to edit. app.js never has to be touched.
-
-   ─── ADDING A SECTION ────────────────────────────────────────────────────
-   Add an entry to OBJECTS. Every entry needs:
-     type      which phenomenon renders it (see the list below)
-     az / el   where it sits in the sky, in degrees.
-               az = compass bearing, 0–360.  el = up/down, roughly -35 to +35.
-     r         how far away it is. Bigger = further. 170–400 works well.
-     label     the short name on the compass tape and lock-on bracket
-     desig     the catalogue string, e.g. "PSR B1919+21". Flavour, but keep it.
-     blocks    the panel contents (see BLOCK TYPES below)
-
-   TYPES: blackhole · pulsar · planet · nebula · galaxy · binary · comet ·
-          rogue · beacon
-   You can reuse a type as many times as you like — two planets is fine.
-
-   ─── BLOCK TYPES ─────────────────────────────────────────────────────────
-   { k:"text",  body:"..." }
-   { k:"stats", items:[["12","Projects"], ...] }
-   { k:"media", title:"Reel", cols:2, items:[ ...see MEDIA below... ] }
-   { k:"audio", title:"Library", items:[ ...see AUDIO below... ] }
-   { k:"rows",  title:"Selected", items:[[name, meta, description], ...] }
-   { k:"tags",  title:"Toolset", items:["Houdini", "*Nuke*", ...] }   *stars* = highlighted
-   { k:"tiers", title:"Rates", items:[{t,p,flag,items:[]}, ...] }
-   { k:"list",  title:"Includes", items:["...", "..."] }
-   { k:"links", title:"Elsewhere", items:[[label, text, href], ...] }
-
-   ─── SHOWING EVERYTHING, NOT JUST THE FEATURED CUT ────────────────────────
-   `items` on a rows/media block is the featured 2-4 you actually want people
-   to see first. Give that same block a `more` array — same item shape as
-   `items` — and a "View all" button appears under it. Clicking it opens a
-   full-screen list/grid of `items` + `more` together, sortable Newest first /
-   Oldest first (it reads the year out of each item's meta or note text, so
-   just keep writing "· 2025" the way you already do).
-
-   Clicking any row anywhere — featured or inside View all — opens it wide in
-   its own screen for an easier read. Media works the same way it already did
-   (the Expand button, or now the thumbnail itself); View all just gives you
-   somewhere to put the rest of the reel instead of leaving it off the page.
-
-     { k:"rows", title:"Selected", items:[...2-4 featured...],
-       more:[...the rest of the work, same [name, meta, description] shape...] }
-
-   ─── MEDIA (your Imgur GIFs) ─────────────────────────────────────────────
-   Imgur serves every GIF as an MP4 too, and it is 5–10× smaller. Take your
-   link — https://i.imgur.com/AbCdEfG.gif — and just swap the extension:
-
-     { kind:"video", src:"https://i.imgur.com/AbCdEfG.mp4",
-       poster:"https://i.imgur.com/AbCdEfGh.jpg",     // optional, h = thumb
-       label:"Shot 04 — debris sim", note:"Houdini · Nuke" }
-
-   Straight GIFs and stills work too:
-     { kind:"image", src:"https://i.imgur.com/AbCdEfG.gif", label:"...", note:"..." }
-
-   Everything lazy-loads and only plays while on screen, so a page full of
-   clips still costs almost nothing until someone actually looks at it.
-
-   ─── AUDIO (your SFX) ────────────────────────────────────────────────────
-   Point at a real file:
-     { title:"Impact — rebar", meta:"0:04 · Layered", src:"sfx/impact-rebar.mp3" }
-
-   Or leave src out and give a synth preset, and the browser generates the
-   sound on the fly — useful for placeholders before your files are uploaded:
-     { title:"Impact — rebar", meta:"0:02 · Demo", synth:"impact" }
-   Presets: impact · whoosh · riser · sub · glitch · chime
-
-   ─── AMBIENCE (each object's own background sound) ──────────────────────
-   Every object on the field can carry a looping ambient bed, the same way
-   the pulsar always has — it swells in as you approach and focus on it,
-   and fades out again once you look away or leave. Nothing to add: every
-   object already has a generated placeholder bed suited to its type
-   (blackhole: hum · pulsar: pulsar.mp3 · planet: wind · nebula: shimmer ·
-   galaxy: choir · binary: pulse · comet: whistle · rogue: creak ·
-   beacon: carrier). To customise a specific object, add a `sound` field
-   to it:
-
-     sound: false                              // silence for this object
-     sound: "sfx/blackhole-rumble.mp3"          // your own real loop
-     sound: { synth:"wind", volume:0.5 }        // swap the placeholder preset
-     sound: { src:"sfx/x.mp3", near:120, far:260 }  // file + custom falloff
-
-   `volume` can also sit at the top level of the object, same as `az`/`el`/
-   `r` — that's how the pulsar's is set below. near/far are the camera
-   distances (in scene units) where the sound is loudest / fully silent.
-   ══════════════════════════════════════════════════════════════════════════ */
-
 const SITE = {
   name: "Deven Hodder - Deep Space Portfolio",
   sub:  "VFX · Sound · 3D · Interface · Code",
@@ -126,10 +37,7 @@ const OBJECTS = [
   lede:"Destruction, fluids, volumetrics and comp. The work I take most seriously",
   blocks:[
     { k:"media", title:"Reel", note:"2024 — 2026", cols:2, items:[
-      { kind:"video", src:"", label:"Shot 01 — collapse", note:"Houdini · RBD" },
-      { kind:"video", src:"", label:"Shot 02 — pyro", note:"Houdini · Karma" },
-      { kind:"video", src:"", label:"Shot 03 — water", note:"FLIP · Nuke" },
-      { kind:"video", src:"", label:"Shot 04 — volumetrics", note:"EmberGen" }
+      { kind:"video", src:"https://i.imgur.com/Jn0ejZt.mp4", label:"Auras - Goku", note:"Roblox Studio · 2026" },
     ], more:[
       {kind:"video", src:"https://i.imgur.com/32wPO5D.mp4", label:"Cherry Ball Impact - A Volleyball Game - Commision", note:"Roblox Studio · 2026" },
       {kind:"video", src:"https://i.imgur.com/QCsdUR8.mp4", label:"Default Ball Impact - A Volleyball Game - Commision", note:"Roblox Studio · 2026" },
@@ -161,14 +69,6 @@ const OBJECTS = [
   title:"Sound <b>design</b>",
   lede:"Impacts, interfaces, atmospheres, creature work. Recorded, layered, resynthesised. Everything below plays in place.",
   blocks:[
-    { k:"audio", title:"Library", note:"Press to audition", items:[
-      { title:"Impact — rebar on concrete", meta:"0:02 · Layered", synth:"impact" },
-      { title:"Whoosh — heavy pass-by",     meta:"0:02 · Doppler", synth:"whoosh" },
-      { title:"Riser — 4 bar build",        meta:"0:03 · Tonal",   synth:"riser"  },
-      { title:"Sub — reactor floor",        meta:"0:04 · Loopable",synth:"sub"    },
-      { title:"UI — confirm",               meta:"0:01 · Dry",     synth:"chime"  },
-      { title:"Glitch — data corruption",   meta:"0:02 · Granular",synth:"glitch" }
-    ]},
     { k:"tags", title:"Toolset", items:["*Audacity*", "More Coming Soon 👀"] },
   ]
 },
@@ -294,6 +194,9 @@ const OBJECTS = [
   title:"Personal <b>work</b>",
   lede:"No client, no brief, no deadline. This is where I try things that might not work, which is most of how I get better at the paid stuff.",
   blocks:[
+    { k:"media", title:"Reel", note:"2026", cols:2, items:[
+      { kind:"video", src:"https://i.imgur.com/RrkkHCS.mp4", label:"LEGION Remake", note:"Roblox Studio · 2026" },
+    ]},
   ]
 },
 
@@ -324,6 +227,371 @@ const OBJECTS = [
     ]},
     { k:"text", body:"Currently taking work." }
   ]
-}
+},
+
+/* ═══════════════════════════════════ EXTRA — for fun, not for work ═════════
+   Pure showpieces, further out than the working nine above (r 1800–2800
+   instead of 250–560) so they read as further away. Real project media/rows
+   can be added later the same way as anywhere else in this file. */
+
+// {
+//   type:"eyeballPlanet", az:18, el:8, r:2000,
+//   label:"Eyeball Planet",
+//   desig:"LP 890-9 c-type · tidally locked",
+//   kind:"Tidally locked terrestrial world",
+//   title:"Eyeball <b>planet</b>",
+//   lede:"One face always toward its star, one face always away — molten on one side, frozen solid on the other, with a ring of maybe-survivable temperature running like an iris between them.",
+//   blocks:[
+//     { k:"text", body:"Every point on the surface picked a side permanently. The dayside never cools, the nightside never warms, and the only weather worth mentioning happens right at the terminator." },
+//     { k:"list", title:"Why it looks like this", items:[
+//       "Tidal locking — matching rotation and orbital period, so one face never turns away from the star",
+//       "No axial mixing — heat can't circulate the way it does on a spinning world",
+//       "The 'pupil' is the only latitude band where liquid water could plausibly exist"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"chthonianPlanet", az:54, el:-14, r:2150,
+//   label:"Chthonian Planet",
+//   desig:"COROT-7 b-type · stripped core",
+//   kind:"Stellar remnant core",
+//   title:"Chthonian <b>planet</b>",
+//   lede:"What's left after a star spends a few billion years sandblasting a gas giant down to the metal. No atmosphere left to lose — just a dense, dark, roasted core, still radiating heat with nowhere else to put it.",
+//   blocks:[
+//     { k:"text", body:"Named for the underworld, not for drama — \"chthonian\" just means it used to have an atmosphere and doesn't anymore. Everything you're looking at was once buried under thousands of kilometres of gas." },
+//     { k:"list", title:"What it used to be", items:[
+//       "A gas giant, probably, before it migrated too close to its star",
+//       "The atmosphere didn't erode gradually — it was stripped, fast, by radiation and stellar wind",
+//       "The cracked glow is leftover heat with nothing left to insulate it"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"relativisticJets", az:88, el:18, r:2500,
+//   label:"Relativistic Jets",
+//   desig:"3C 273-type · AGN core",
+//   kind:"Active galactic nucleus",
+//   title:"Relativistic <b>jets</b>",
+//   lede:"Twin beams of ionised matter, blasted out from the poles of a feeding supermassive black hole at a meaningful fraction of the speed of light. The disk feeds the jets; the jets are the disk's excess, with nowhere else to go.",
+//   blocks:[
+//     { k:"text", body:"The accretion disk can't swallow everything it pulls in. What doesn't fall past the horizon gets funnelled along the magnetic field lines at the poles instead and shot out, collimated, for thousands of light-years." },
+//     { k:"list", title:"The scale of it", items:[
+//       "Real AGN jets can outshine every star in their host galaxy combined",
+//       "They stay collimated — narrow, not spreading out — for a genuinely absurd distance",
+//       "Doppler beaming means a jet pointed roughly at you looks far brighter than one pointed away"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"kilonova", az:104, el:-6, r:2300,
+//   label:"Kilonova",
+//   desig:"GW170817-type · NS merger",
+//   kind:"Neutron star merger",
+//   title:"<b>Kilonova</b>",
+//   lede:"Two neutron stars, spiralling into each other for a few hundred million years, finally collide. What's left over is a blinding, radioactive fireball — and most of the periodic table's gold and platinum.",
+//   blocks:[
+//     { k:"text", body:"Everything expanding outward from the merger is decaying r-process material — the only known site violent enough to actually forge elements heavier than iron in any real quantity. The gold in the ground came from something like this." },
+//     { k:"stats", items:[["~0.05c","Ejecta speed"],["Days","Afterglow"],["Au · Pt","End product"]] }
+//   ]
+// },
+
+// {
+//   type:"whiteDwarfDisk", az:133, el:12, r:1950,
+//   label:"Cataclysmic Variable",
+//   desig:"SS Cygni-type · CV system",
+//   kind:"Accreting white dwarf",
+//   title:"White dwarf <b>+ disk</b>",
+//   lede:"An Earth-sized stellar corpse, dense enough that a teaspoon of it would weigh tons, actively stripping gas off a companion star and spiralling it down through a disk hot enough to outshine both stars combined.",
+//   blocks:[
+//     { k:"text", body:"It's already dead — no fusion left, just gravity doing the work now. But \"dead\" doesn't mean quiet: material torn from the companion heats up violently on the way in, and every so often the whole disk detonates in a nova bright enough to see without a telescope." },
+//     { k:"list", title:"Worth knowing", items:[
+//       "The white dwarf itself is roughly Earth-sized but holds close to a full stellar mass",
+//       "The disk, not the star, is usually the brightest thing in the system",
+//       "Enough of these eventually tip past a mass limit and go supernova instead"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"thorneZytkow", az:149, el:-18, r:2400,
+//   label:"Thorne-Żytkow Object",
+//   desig:"HV 2112-type · hybrid star",
+//   kind:"Red supergiant with neutron core",
+//   title:"Thorne-<b>Żytkow</b> object",
+//   lede:"A red supergiant that swallowed a neutron star instead of colliding with it outright — the two didn't destroy each other, they merged into one deeply unstable hybrid, giant on the outside, dead star still burning at the middle.",
+//   blocks:[
+//     { k:"text", body:"From outside it mostly reads as an ordinary, if unusually large, red supergiant. What gives it away is the chemistry — fusion happening under conditions no normal star could produce, dredging elements to the surface that shouldn't be there." },
+//     { k:"list", title:"Still theoretical, mostly", items:[
+//       "Only a small handful of real candidates have ever been proposed",
+//       "The neutron core doesn't fuse — its gravity does the heavy lifting instead",
+//       "Expected to be short-lived, geologically speaking, before it collapses further"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"matrioshkaBrain", az:178, el:6, r:2200,
+//   label:"Matrioshka Brain",
+//   desig:"Class-B megastructure · Kardashev II+",
+//   kind:"Nested Dyson computation array",
+//   title:"Matrioshka <b>brain</b>",
+//   lede:"A star, fully enclosed by shell after shell of solar collectors, each layer running colder and computing on the waste heat of the one inside it. Not a home. A machine the size of a solar system, built to think.",
+//   blocks:[
+//     { k:"text", body:"Named for the nesting dolls — the innermost shell runs hottest and fastest, and every layer after it recycles the heat the one before it couldn't use, right down to a shell running barely above the temperature of open space." },
+//     { k:"list", title:"The idea, roughly", items:[
+//       "Total surface area, across every shell, dwarfs the star's own surface many times over",
+//       "Each layer is a full Dyson swarm in its own right, not a solid sphere",
+//       "Purely speculative — nobody's found one, but the thermodynamics work out"
+//     ]}
+//   ]
+// },
+
+// /* ─────────── wave 2: the rest of "Exotic Stars & Objects" ─────────── */
+
+// {
+//   type:"quarkStar", az:193, el:-10, r:2100,
+//   label:"Quark Star",
+//   desig:"XTE J1739-285-type · quark matter",
+//   kind:"Ultra-dense compact remnant",
+//   title:"<b>Quark</b> star",
+//   lede:"Denser than a neutron star, if such a thing is allowed to exist — gravity crushing protons and neutrons past the point where they can stay protons and neutrons, down into a continuous soup of free quarks.",
+//   blocks:[
+//     { k:"text", body:"A neutron star is already matter held together by nothing but gravity and quantum pressure. Push past that limit and, in theory, the neutrons themselves give way — not to a black hole, but to something stranger that just barely avoids collapsing all the way." },
+//     { k:"list", title:"Why it's still theoretical", items:[
+//       "Nobody has directly observed quark matter — every candidate is inferred indirectly, from a mass and radius that don't fit a normal neutron star",
+//       "It would be barely larger than a city, while outweighing the Sun",
+//       "Some models predict it should glow at a temperature nothing else in this list reaches"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"blueStraggler", az:223, el:20, r:2450,
+//   label:"Blue Straggler",
+//   desig:"WOCS 5379-type · cluster outlier",
+//   kind:"Rejuvenated main-sequence star",
+//   title:"Blue <b>straggler</b>",
+//   lede:"A star in an old, otherwise well-behaved cluster that looks decades too young for its neighbours — hotter, bluer, and burning like it has millions of years left, because it does. It cheated.",
+//   blocks:[
+//     { k:"text", body:"Every other star in a cluster this old should have aged past this point by now. A blue straggler gets a second youth by colliding with, or slowly stealing mass from, another star — buying itself a fresh supply of hydrogen and starting the clock over." },
+//     { k:"list", title:"Two ways to cheat", items:[
+//       "A direct stellar collision, in a cluster dense enough for that to actually happen",
+//       "Slow mass transfer from a binary companion, siphoned across for millions of years",
+//       "Either way, the result looks younger than physically possible for its surroundings"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"darkStar", az:243, el:-15, r:2600,
+//   label:"Dark Star",
+//   desig:"Pop-III DS candidate · z > 15",
+//   kind:"Dark-matter-powered protostar",
+//   title:"<b>Dark</b> star",
+//   lede:"Not dark as in invisible — dark as in powered by dark matter, not fusion. A theoretical early-universe star, held up and heated from the inside by dark matter annihilating in its core instead of hydrogen burning.",
+//   blocks:[
+//     { k:"text", body:"If they existed, dark stars would have formed before any normal star — huge, puffy, and comparatively cool, running on captured dark matter instead of nuclear fusion for as long as the fuel held out. Once it ran dry, the star would collapse and finally ignite for real." },
+//     { k:"list", title:"Why it looks the way it does", items:[
+//       "No hard surface — modelled here as diffuse and hazy rather than a sharp blackbody sphere, the way the real prediction reads",
+//       "Could have grown enormous — some estimates put them at hundreds of times the Sun's radius",
+//       "A bridge object — the link between the first dark matter haloes and the first real stars"
+//     ]}
+//   ]
+// },
+
+// /* ─────────── wave 3: the rest of "Extreme Planetary Types" ─────────── */
+
+// {
+//   type:"carbonPlanet", az:271, el:15, r:2350,
+//   label:"Carbon Planet",
+//   desig:"55 Cancri e-type · C/O > 1",
+//   kind:"Graphite-carbide world",
+//   title:"Carbon <b>planet</b>",
+//   lede:"A world built from the wrong side of the periodic table for a rocky planet — graphite and carbide instead of silicate rock, with a mantle that, under enough pressure, crystallises into layer after layer of solid diamond.",
+//   blocks:[
+//     { k:"text", body:"It comes down to what the system had more of while the planet was forming — carbon or oxygen. Enough carbon and you don't get ordinary rock, you get graphite, carbides, and at depth, diamond load-bearing the entire mantle." },
+//     { k:"list", title:"Not actually good news", items:[
+//       "A diamond mantle would likely be a poor conductor of heat, trapping it in ways that mess with plate tectonics entirely",
+//       "The surface would be closer to graphite and tar than to soil",
+//       "55 Cancri e is the real, if disputed, candidate this idea is built on"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"ironPlanet", az:283, el:-20, r:2500,
+//   label:"Iron Planet",
+//   desig:"Kepler-107c-type · Fe-dominant",
+//   kind:"Metal-rich terrestrial world",
+//   title:"Iron <b>planet</b>",
+//   lede:"Almost nothing but core — a rocky planet that lost its mantle somewhere along the way, or simply never built one, leaving a dense, dark, magnetically violent iron world standing in for what should have been a whole planet.",
+//   blocks:[
+//     { k:"text", body:"Earth is roughly a third iron by mass, nearly all of it locked in the core. Strip away the rock on top and you'd be left with something like this — small for its weight, unnervingly dense, and generating a magnetic field way out of proportion to its size." },
+//     { k:"list", title:"How a planet ends up like this", items:[
+//       "A giant impact, early on, that blasts the mantle off and leaves the core exposed",
+//       "Extreme proximity to its star, with radiation slowly stripping the lighter material away",
+//       "Either path leaves a planet far denser than its size would suggest"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"blanet", az:310, el:10, r:2150,
+//   label:"Blanet",
+//   desig:"TON 618-adjacent · SMBH orbiter",
+//   kind:"Black-hole-orbiting planet",
+//   title:"<b>Blanet</b>",
+//   lede:"A planet that formed around a black hole instead of a star — no sunrise, no sunset, just a faint, permanent ember of accretion light standing in for a sun that was never there to begin with.",
+//   blocks:[
+//     { k:"text", body:"Supermassive black holes at the centres of quiet galaxies can hold a disk of gas and dust far out from the horizon — cool enough, far enough out, to collapse into planets the same way a protoplanetary disk around a young star does. The result orbits something that emits almost no visible light at all." },
+//     { k:"list", title:"What it would actually be like", items:[
+//       "Permanently, brutally cold — accretion glow is a poor substitute for a real star",
+//       "Tidal forces this close to something this massive would be relentless",
+//       "The name is exactly what it sounds like — \"black hole\" plus \"planet\""
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"synestia", az:342, el:-8, r:2450,
+//   label:"Synestia",
+//   desig:"Post-impact · Moon-forming stage",
+//   kind:"Vaporised-rock donut structure",
+//   title:"<b>Synestia</b>",
+//   lede:"Not a planet and not a disk — a donut-shaped cloud of vaporised rock, spinning too fast to pull itself back into a sphere, made in the instant after two planet-sized bodies collide hard enough to melt and merge.",
+//   blocks:[
+//     { k:"text", body:"The name is a coinage — synestia, from the Greek for \"hearth\" plus \"together.\" It's a proposed missing stage in planet formation: the aftermath of a giant impact, spinning so fast that the merged material forms a torus instead of settling into a sphere, before eventually cooling and condensing into a moon and a planet." },
+//     { k:"list", title:"The pitch", items:[
+//       "It's one of the leading models for how Earth's Moon actually formed",
+//       "It only exists for a geological eyeblink — thousands of years, not millions, before it collapses back down",
+//       "Everything in it is simultaneously part of the same connected body, unlike a planet with a separate disk"
+//     ]}
+//   ]
+// },
+
+// /* ─────────── wave 4: the rest of "High-Energy Cosmic Events" plus all
+//    of "Megastructures & Anomalies" ─────────── */
+
+// {
+//   type:"hypernova", az:9, el:12, r:2050,
+//   label:"Hypernova",
+//   desig:"GRB 980425-type · collapsar",
+//   kind:"Black-hole-forming stellar collapse",
+//   title:"<b>Hypernova</b>",
+//   lede:"A supernova that doesn't stop at \"dead star\" — the core keeps collapsing straight through a neutron star and into a black hole, venting the excess energy as twin gamma-ray bursts on the way down.",
+//   blocks:[
+//     { k:"text", body:"An ordinary supernova leaves a neutron star behind and calls it done. A hypernova belongs to a rarer, much more massive class of collapsing star — enough mass falling in fast enough that the core doesn't stop at neutron-degenerate matter, it keeps going until it's a black hole, with a gamma-ray burst as the receipt." },
+//     { k:"list", title:"Why it matters", items:[
+//       "Long-duration gamma-ray bursts are the most energetic events in the universe short of the Big Bang itself",
+//       "The collapsar model — core collapse straight to a black hole — is the leading explanation for where they come from",
+//       "Only a star well above about 25 solar masses is thought to go this route instead of leaving a neutron star behind"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"magnetarFlares", az:27, el:-16, r:2250,
+//   label:"Magnetar Flares",
+//   desig:"SGR 1806-20-type · soft gamma repeater",
+//   kind:"Ultra-magnetised neutron star",
+//   title:"Magnetar <b>flares</b>",
+//   lede:"A neutron star with a magnetic field so strong it periodically cracks its own crust — a starquake that releases more energy in a tenth of a second than the Sun puts out in 100,000 years.",
+//   blocks:[
+//     { k:"text", body:"Every neutron star has a strong magnetic field. A magnetar's is stronger by another factor of a thousand — strong enough to physically twist and stress the crust until it fractures, the way tectonic stress builds and releases along a fault line, just with a lot more X-rays involved." },
+//     { k:"list", title:"For scale", items:[
+//       "A magnetar's field could strip the data off a credit card from roughly halfway to the Moon",
+//       "The December 2004 flare from SGR 1806-20 briefly outshone every other gamma-ray source in the sky combined, from 50,000 light-years away",
+//       "They're thought to be a phase most neutron stars pass through early on, not a separate species of star"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"cosmicStrings", az:45, el:24, r:2700,
+//   label:"Cosmic Strings",
+//   desig:"Topological defect · pre-inflation relic",
+//   kind:"Hypothetical spacetime defect",
+//   title:"Cosmic <b>strings</b>",
+//   lede:"A hypothetical crack left over from the instant after the Big Bang — infinitely thin, unimaginably dense, carrying so much mass per length that even a short stretch could outweigh a planet.",
+//   blocks:[
+//     { k:"text", body:"The early universe cooled unevenly, the way water doesn't freeze into one perfect crystal — it freezes into a lattice of domains that meet at defects. A cosmic string would be one of those defects frozen into spacetime itself: a one-dimensional flaw stretching across the observable universe, if it exists at all." },
+//     { k:"list", title:"Why nobody's found one", items:[
+//       "The clearest predicted signature is gravitational lensing that splits a background object into two identical, unlensed-looking images — extremely specific, and never confirmed",
+//       "A moving string is predicted to occasionally form a cusp — a point briefly moving at a meaningful fraction of light speed, bright enough in theory to detect",
+//       "They're a natural prediction of several inflation models, which is the main reason anyone still looks"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"aldersonDisk", az:63, el:-8, r:2400,
+//   label:"Alderson Disk",
+//   desig:"Class-A megastructure · monolithic",
+//   kind:"Star-centred artificial platter",
+//   title:"Alderson <b>disk</b>",
+//   lede:"A single flat, solid platter wide enough to swallow a solar system, with a star burning in a hole at the centre — an engineering project on a scale that makes a Dyson sphere look modest.",
+//   blocks:[
+//     { k:"text", body:"Named for its inventor, not for anyone who's actually built one. Set a star in the central bore of a rigid disk light-hours across and you get gravity that reads as roughly Earth-like across most of the surface, and a permanent day on one face and permanent night on the other — no rotation needed." },
+//     { k:"list", title:"The engineering problems, roughly in order", items:[
+//       "No known material is remotely strong enough to hold its own shape at this scale without buckling",
+//       "It isn't gravitationally stable long-term without active correction — nothing this shape naturally stays centred on its star",
+//       "Even granting both of those, you'd still need to move a meaningful fraction of a solar system's mass to build it"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"klempererRosette", az:233, el:18, r:2150,
+//   label:"Klemperer Rosette",
+//   desig:"n=6 · co-orbital resonance",
+//   kind:"Mutually stabilised orbital ring",
+//   title:"Klemperer <b>rosette</b>",
+//   lede:"Several equal-mass bodies sharing a single orbit, spaced perfectly evenly so each one's gravity cancels out against its neighbours — a geometric configuration balanced by nothing but the arrangement itself.",
+//   blocks:[
+//     { k:"text", body:"Named for the physicist who worked out the arrangement in 1962. It's a legitimate solution to the gravitational many-body problem — stable to a first approximation — for any even number of equal masses spaced evenly around a shared orbit, each one pulled equally by all the others." },
+//     { k:"list", title:"The catch", items:[
+//       "It's only neutrally stable — a small nudge to one body doesn't get corrected, it just slowly grows",
+//       "Nothing like this has ever been observed in nature, which is roughly what that stability problem would predict",
+//       "It shows up constantly in science fiction anyway, because visually nothing else looks quite like it"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"greatAttractor", az:333, el:-22, r:2850,
+//   label:"The Great Attractor",
+//   desig:"Norma Cluster region · Laniakea core",
+//   kind:"Regional gravitational anomaly",
+//   title:"The Great <b>Attractor</b>",
+//   lede:"A gravitational anomaly quietly pulling our galaxy, and thousands of others, toward it at hundreds of kilometres per second — and one that's almost impossible to actually look at.",
+//   blocks:[
+//     { k:"text", body:"It sits almost directly behind the disk of the Milky Way from our vantage point, in a region astronomers call the Zone of Avoidance — dust and stars in our own galaxy block most of the visible light, so most of what's known about it comes from galaxy motions and radio/X-ray surveys rather than a direct picture." },
+//     { k:"list", title:"What's actually there", items:[
+//       "A dense concentration of galaxy clusters, the Norma Cluster prominent among them — not one exotic object, just an ordinary and very large amount of mass",
+//       "It's now understood to be one part of an even larger structure, the Laniakea Supercluster, that our own galaxy belongs to",
+//       "\"Attractor\" describes the effect, not a mechanism — it's pulling on everything nearby for the most mundane reason there is: gravity, a lot of it, in one place"
+//     ]}
+//   ]
+// },
+
+// {
+//   type:"einsteinRing", az:351, el:6, r:2550,
+//   label:"Einstein Ring",
+//   desig:"Perfect-alignment lens · θE geometry",
+//   kind:"Gravitational lensing artefact",
+//   title:"Einstein <b>ring</b>",
+//   lede:"Not an object — an alignment. When a massive galaxy sits exactly between us and a more distant one, its gravity bends the background galaxy's light into a perfect ring instead of the usual smeared arc.",
+//   blocks:[
+//     { k:"text", body:"Gravitational lensing usually produces a smear, a partial arc, or multiple distorted images, because the alignment is never quite perfect. Line the lensing mass, the background source, and the observer up exactly, though, and general relativity predicts the light bends evenly all the way around — a ring, not an arc." },
+//     { k:"list", title:"Worth knowing", items:[
+//       "Einstein calculated the effect in 1936 and figured it would never actually be observable — the alignment seemed too precise to expect in nature",
+//       "Real ones have since been found and photographed, mostly by wide surveys catching a lucky lineup",
+//       "The ring's exact size tells you the mass of the foreground galaxy — one of the more direct ways to weigh something using only its gravity"
+//     ]}
+//   ]
+// }
 
 ];
